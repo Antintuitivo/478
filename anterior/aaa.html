@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <style>
+            .exp{
+              font-size:1vw
+            }
+            
+            .left, .right {
+                float: left;
+                width: 20%; /* El ancho es 20% por defecto */
+            }
+            .no {
+                color: rgba(0, 0, 0, 0);
+            }
+
+            .main {
+                float: left;
+                width: 60%; /* El ancho es 60% por defecto */
+            }
+            
+            /* Usa media para añadir un punto de quiebre a los 800px: */
+            @media screen and (max-width: 800px) {
+            .left, .main, .right {
+            width: 100%; /* El ancho es 100% cuando el puerto de vision es de 800px o menor */
+                }
+            }
+            a {color: black;}
+            body {background-color: rgb(119, 180, 216);}
+            h1 {color: rgb(0, 0, 0);}
+            button {
+              border-radius: 40px;
+              outline-style: none;
+              outline-width: 0px;
+              outline: 0px;
+              outline-offset: 0px;
+              background-color: rgb(119, 180, 216);
+            }
+
+          </style>
+          <link rel="icon" href="imagenes/images_Wireless_Signal_Red.png">
+        <meta charset="utf-8"/>
+        <title>Activadores</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="Descripcion" content="contiene botones que permiten interactuar con un eUPD encender el puerto 1, apagar el puerto 1 y encender el puerto 4 por 5 segundos"/>
+        <meta name="autor" content="Roldan Tomas"/>
+    </head>
+   <body>
+    <div class="left">
+        <p class="no">algo</p>
+      </div>
+      
+      <center>
+      <div class="main">
+
+        
+        
+        <h1 style="font-size:5vw" >Activadores de ePDU</h1>
+        <a href="http://10.0.1.250/set.cmd?user=admin+pass=12345678+cmd=setpower+p61=1" target="_blank"><button type="button" style="font-size:2vw">&#9898</button></a>
+        <p class="exp">Encender Puerto 1</p>
+        <a href="http://10.0.1.250/set.cmd?user=admin+pass=12345678+cmd=setpower+p61=0" target="_blank"> <button style="font-size:2vw">&#9899</button></a>
+        <p class="exp">Apagar Puerto 1</p>
+        <a href="http://10.0.1.250/set.cmd?user=admin+pass=12345678+cmd=setpower+p64=1+p64=0+t64=5" target="_blank"><button style="font-size:2vw">&#128337</button></a>
+        <p class="exp">Encender Puerto 4 por 5 seg</p>
+
+      </div>
+      </center>
+      
+      <div class="right">
+        <p class="no">algo</p>
+      </div>
+      
+   </body>
+</html>
