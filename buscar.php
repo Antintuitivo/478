@@ -15,36 +15,38 @@ if ($conexión = mysqli_connect($servername, $username, $password, $dbname)){
 echo "<p>MySQL le ha dado permiso a PHP para ejecutar consultas con ese usuario</p>";
 }
 // 2) Preparar la orden SQL
-$consulta= "SELECT*FROM usuarios WHERE ";
+$consulta= "SELECT*FROM registros WHERE (";
 if(!empty($nombre)){
-    $consulta= $consulta + "Nombre like $nombre " ;
+    $consulta= $consulta + "Nombre LIKE $nombre " ;
 }
 
 if(!empty($nombre) && !empty($apellido)){
-    $consulta= $consulta + "and  ";
+    $consulta= $consulta + "AND  ";
 }
 
 if(!empty($apellido)){
-    $consulta= $consulta + "Apellido like $apellido ";
+    $consulta= $consulta + "Apellido LIKE $apellido ";
 }
 
 if((!empty($apellido) && !empty($correo)) || (!empty($correo) && !empty($nombre))){
-    $consulta= $consulta + "and  ";
+    $consulta= $consulta + "AND  ";
 }
 
 //si buscan según un correo, se agrega la línea
 if(!empty($correo)){
-    $consulta= $consulta + "Correo like $correo ";
+    $consulta= $consulta + "Correo LIKE $correo ";
 }
 
-//si es administrador además dde alguna de las anteriores, se agrega la línea
+//si es administrador además de alguna de las anteriores, se agrega la línea
 if((!empty($apellido) && !empty($administrador)) || (!empty($administrador) && !empty($nombre)) && (!empty($administrador) && !empty($correo))){
-    $consulta= $consulta + "and  ";
+    $consulta= $consulta + "AND  ";
 }
 
 if(!empty($administrador)){
-    $consulta= $consulta + "administrador like $administrador";
+    $consulta= $consulta + "administrador LIKE $administrador";
 }
+
+$consulta= $consulta + ")";
 
 // 3) Ejecutar la orden y obtener datos
 mysqli_select_db($conexión,$dbname);
@@ -52,15 +54,37 @@ $datos= mysqli_query ($conexión,$consulta);
 
 // 4) Ir Imprimiendo las filas resultantes
 while ($fila = mysqli_fetch_array($datos)){
+
 echo "<p> ";
-echo $fila ["horario"];
+
+echo $fila ["Fecha"];
+
 echo " - "; // un separador
+
 echo $fila["Nombre"];
+
 echo " - "; // un separador
+
 echo $fila ["Apellido"];
+
 echo " - "; // un separador
+
 echo $fila["Correo"];
+
+echo " - "; // un separador
+
+if($fila["administrador"]== 1){//revisa si es un administrador y responde según lo encontrado
+    echo "Administrador";
+}else{
+    echo "Usuario";
+}
+
+echo " - "; // un separador
+
+echo $fila ["Operacion"];
+
 echo " </p>";
+
 echo "</br>";
 }
 
