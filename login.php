@@ -2,8 +2,8 @@
  $correo = $_POST['Correo'];
  $Contr = $_POST['Pass'];
  $servername = "localhost";
- $username = "tester1"; //"root"
- $PasServer = "tester1"; //"root"
+ $username = "root"; //"tester1"
+ $PasServer = ""; //"tester1"
  $dbname = "usuarios_registrados";
 
 //  Conexión
