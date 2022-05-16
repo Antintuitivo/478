@@ -1,3 +1,10 @@
+<?php 
+    session_start();
+    if ($_SESSION['correo'] == "" || $_SESSION['Pass'] == ""){
+        session_destroy();
+        header("Location: http://localhost/RoldanTomas/index.html");
+    }
+?>
 <!DOCTYPE html>
 <html lang="es">
     <head>

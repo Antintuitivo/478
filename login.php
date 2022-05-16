@@ -1,6 +1,14 @@
 <?php
+session_id();
+session_start();
+
+ // Guardar datos de sesión
+$_SESSION["correo"] = $_POST['correo'];
+$_SESSION["Pas"] = $_POST['Pass'];
+
  $correo = $_POST['Correo'];
  $Contr = $_POST['Pass'];
+
  $servername = "localhost";
  $username = "root"; //"tester1"
  $PasServer = ""; //"tester1"
@@ -46,6 +54,7 @@ if(($correo == $corrTabla) && ($Contr == $passTabla) && ($userType == "1")){
     header("Location: http://10.0.250.250/RoldanTomas/paginaUsuario.html", true, 301);
 
 } else{
+    session_destroy();
     header("Location: http://10.0.250.250/RoldanTomas/ErrorDeLogin.html", true, 301);
 
 }

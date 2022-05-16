@@ -1,10 +1,16 @@
 <?php
+// Comienzo de la sesión
+session_start();
+
+
+
 //Variables
  $servername = "localhost";
- $username = "tester1"; //"root"
- $password = "tester1"; //""
+ $username = "root"; //"tester1"
+ $password = ""; //"tester1"
  $dbname = "usuarios_registrados";
 
+ /* Anterior
  $nombre = $_POST['nombre']; 
  $apellido = $_POST['apellido'];
  $correo = $_POST['correo'];
@@ -13,7 +19,7 @@
  if (!empty($_POST['admin'])){
  $Admin = 1;
  }
-
+*/
 
 // Create connection
  $conn = new mysqli($servername, $username, $password, $dbname);
@@ -31,5 +37,6 @@ if ($conn->query($sql)) {
   echo "Error: " . $sql . "<br>" . $conn->error;
 }
 
+session_destroy();
 $conn->close();
 ?>
