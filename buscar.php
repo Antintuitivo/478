@@ -55,6 +55,8 @@ $datos= mysqli_query ($conexión,$consulta);
 // 4) Ir Imprimiendo las filas resultantes
 while ($fila = mysqli_fetch_array($datos)){
 
+echo "<header> Registros de ingresos y egresos de cuentas </header>";
+
 echo "<p> ";
 
 echo $fila ["Fecha"];
@@ -75,7 +77,8 @@ echo " - "; // un separador
 
 if($fila["administrador"]== 1){//revisa si es un administrador y responde según lo encontrado
     echo "Administrador";
-}else{
+}
+else{
     echo "Usuario";
 }
 
