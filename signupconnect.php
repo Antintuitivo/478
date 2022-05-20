@@ -10,7 +10,7 @@ session_start();
  $password = ""; //"tester1"
  $dbname = "usuarios_registrados";
 
- /* Anterior
+ 
  $nombre = $_POST['nombre']; 
  $apellido = $_POST['apellido'];
  $correo = $_POST['correo'];
@@ -19,7 +19,7 @@ session_start();
  if (!empty($_POST['admin'])){
  $Admin = 1;
  }
-*/
+
 
 // Create connection
  $conn = new mysqli($servername, $username, $password, $dbname);

@@ -1,8 +1,14 @@
-<?php
-$nombre = $_POST['SNombre'];
-$apellido = $_POST['SApellido'];
-$correo = $_POST['SCorreo'];
-$administrador = $_POST['SAdmin'];
+<?php 
+    session_start();
+    if ($_SESSION['correo'] == "" || $_SESSION['Pass'] == ""){
+        session_destroy();
+        header("Location: http://localhost/RoldanTomas/index.html");
+    }
+
+    $nombre = $_POST['SNombre'];
+    $apellido = $_POST['SApellido'];
+    $correo = $_POST['SCorreo'];
+    $administrador = $_POST['SAdmin'];
 
 
  $servername = "localhost";

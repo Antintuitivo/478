@@ -1,26 +1,14 @@
+<?php 
+    session_start();
+    if ($_SESSION['correo'] == "" || $_SESSION['Pass'] == ""){
+        session_destroy();
+        header("Location: http://localhost/RoldanTomas/index.html");
+    }
+?>
 <!DOCTYPE html>
 <html lang="es">
     <head>
-        <style>
-            .exp{
-              font-size:1vw;
-            }
-            
-            .no {
-                color: rgba(0, 0, 0, 0);
-            }
-            
-            button {
-              border-radius: 8px;
-              outline-style: none;
-              outline-width: 0px;
-              outline: 0px;
-              outline-offset: 0px;
-              background-color: rgb(119, 180, 216);
-            }
-
-          </style>
-          <link rel="stylesheet" href="estilos.css">
+          <link rel="stylesheet" href="css/estilos.css">
           <link rel="icon" href="imagenes/images_Wireless_Signal_Red.png">
         <meta charset="utf-8"/>
         <title>Comandos</title>
@@ -28,11 +16,11 @@
     </head>
    <body>
     <div class="left">
-        <p class="no">algo</p>
+        <p class="no">ooo</p>
       </div>
       
       <center>
-      <div class="main">
+      <article class="main">
 
         
         
@@ -43,7 +31,7 @@
           <button class="btn-enviar" type="submit" formaction="comandosraspi3.php" style="font-size:2vw">Comando3</button>
         </form>
 
-      </div>
+      </article>
       </center>
       
       <div class="right">

@@ -1,5 +1,4 @@
 <?php
-session_id();
 session_start();
 
  // Guardar datos de sesión
@@ -15,15 +14,15 @@ $_SESSION["Pas"] = $_POST['Pass'];
  $dbname = "usuarios_registrados";
 
 //  Conexión
-if ($conexión = mysqli_connect($servername, $username, $PasServer, $dbname)){
- echo "<p>MySQL le ha dado permiso a PHP para a este usuario</p>";
+if ($conn = mysqli_connect($servername, $username, $PasServer, $dbname)){
+ echo "<p>MySQL le ha dado permiso a PHP para este usuario</p>";
 
  //  Preparar la orden SQL
  $consulta= "SELECT * FROM usuarios WHERE (Correo='$correo' AND Contra='$Contr') ";
 
  // Declaro variables para evitar errores inesperados
- mysqli_select_db($conexión, $dbname);
- $datos = mysqli_query ($conexión, $consulta);
+ mysqli_select_db($conn, $dbname);
+ $datos = mysqli_query ($conn, $consulta);
  $userType = "0";
  $corrTabla = "";
  $passTabla = "";
@@ -45,17 +44,26 @@ if ($conexión = mysqli_connect($servername, $username, $PasServer, $dbname)){
             $userType = 0;
         }
         //echo $userType;
+
+        $apellido= $fila['Apellido'];
+        $nombre = $fila['Nombre'];
     }
+
+    $registro= "INSERT INTO `registros` (`Nombre`, `Apellido`, `Correo`, `Operación`, `administrador`) 
+    VALUES ('$nombre', '$apellido', '$correo', 'Ingreso', '$userType')";
+
 } //Compara el usuario ingresado con el de la tabla y redirecciona según si es usuario o Administrador
 if(($correo == $corrTabla) && ($Contr == $passTabla) && ($userType == "1")){
-    header("Location: http://10.0.250.250/RoldanTomas/paginaAdmin.html", true, 301);
+    header("Location: http://localhost/RoldanTomas/paginaAdmin.php", true, 301);
+    $conn->query($registro);
 
 } elseif(($correo == $corrTabla) && ($Contr == $passTabla) && ($userType == "0")){
-    header("Location: http://10.0.250.250/RoldanTomas/paginaUsuario.html", true, 301);
-
-} else{
+    header("Location: http://localhost/RoldanTomas/paginaUsuario.php", true, 301);
+    $conn->query($registro);
+    
+} else{//expulsa al usuario si no coinciden los datos
     session_destroy();
-    header("Location: http://10.0.250.250/RoldanTomas/ErrorDeLogin.html", true, 301);
+    header("Location: http://localhost/RoldanTomas/ErrorDeLogin.html", true, 301);
 
 }
 

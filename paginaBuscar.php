@@ -10,7 +10,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Formulario de búsqueda</title>
-        <link rel="stylesheet" href="estilos.css">
+        <link rel="stylesheet" href="css/estilos.css">
     </head>
     <body>
         <h1 class="from-titulo">Formulario de búsqueda</h1>
