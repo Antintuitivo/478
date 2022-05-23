@@ -21,9 +21,9 @@
 
                 <select name="STabla" class="input-100">
                     
-                    <option value="registros">Registros de operaciones</option>
+                    <option class="input-100" value="registros">Registros de operaciones</option>
 
-                    <option value="usuarios">Usuarios registrados</option>
+                    <option class="input-100" value="usuarios">Usuarios registrados</option>
 
                 </select>
 
@@ -35,9 +35,9 @@
 
                 <select name="SAdmin" class="input-100">
 
-                    <option value="0">Usuario</option>
+                    <option class="input-100" value="0">Usuario</option>
 
-                    <option value="1">Administrador</option>
+                    <option class="input-100" value="1">Administrador</option>
 
                 </select>
 

@@ -56,7 +56,7 @@ if ($conn = mysqli_connect($servername, $username, $PasServer, $dbname)){
     $_SESSION['Apellido'] = $apellido;
     $_SESSION['Nombre'] = $nombre;
 
-    $registro= "INSERT INTO `registros` (`Nombre`, `Apellido`, `Correo`, `Operación`, `administrador`) 
+    $registro= "INSERT INTO `registros` (`Nombre`, `Apellido`, `Correo`, `Operacion`, `administrador`) 
     VALUES ('$nombre', '$apellido', '$correo', 'Ingreso', '$userType')";
 
 } //Compara el usuario ingresado con el de la tabla y redirecciona según si es usuario o Administrador

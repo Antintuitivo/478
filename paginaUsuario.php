@@ -31,6 +31,7 @@
           <button class="btn-enviar" type="submit" formaction="comandosraspi.php" style="font-size:2vw">Comando1</button>
           <button class="btn-enviar" type="submit" formaction="comandosraspi2.php" style="font-size:2vw">Comando2</button>
           <button class="btn-enviar" type="submit" formaction="comandosraspi3.php" style="font-size:2vw">Comando3</button>
+          <button class="btn-enviar" type="submit" formaction="logout.php" style="font-size:2vw">Salir</button>
         </form>
 
       </article>
