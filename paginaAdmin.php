@@ -1,8 +1,11 @@
 <?php 
     session_start();
-    if ($_SESSION['correo'] == "" || $_SESSION['Pass'] == ""){
-        session_destroy();
-        header("Location: http://localhost/RoldanTomas/index.html");
+    if ($_SESSION['correo'] == "" || $_SESSION['Pass'] == "" || $_SESSION['administrador'] == 0){
+      
+      session_destroy();
+      echo "Usuario no autorizado";
+      
+      die();
     }
 ?>
 <!DOCTYPE html>
@@ -20,25 +23,25 @@
       </div>
       
       <center>
-      <div class="main">
+        <div class="main">
 
-        
-        
-        <h1 style="font-size:5vw" >Enlaces de administrador</h1>
-        <a href="http://localhost/RoldanTomas/paginaUsuario.html"><!--10.0.250.250-->
-          <button class="btn-enviar" type="button" style="font-size:2vw">Página de Usuario</button>
-        </a>
-        <!-- <p class="exp">Encender Puerto 1</p> -->
-        <a href="http://localhost/RoldanTomas/buscar.html">
-          <button class="btn-enviar" style="font-size:2vw">Buscar Usuario</button>
-        </a>
-        <!--<p class="exp">Apagar Puerto 1</p>-->
-        <a href="http://localhost/RoldanTomas/signin.html" target="_blank"><!--10.0.250.250-->
-          <button class="btn-enviar" style="font-size:2vw">Crear Nuevo Usuario</button>
-        </a>
-        <!--<p class="exp">Encender Puerto 4 por 5 seg</p>-->
+          
+          
+          <h1 style="font-size:5vw" >Enlaces de administrador</h1>
+          <a href="http://localhost/RoldanTomas/paginaUsuario.php"> <!--10.0.250.250-->
+            <button class="btn-enviar" type="button" style="font-size:2vw">Página de Usuario</button>
+          </a>
+          <!-- <p class="exp">Encender Puerto 1</p> -->
+          <a href="http://localhost/RoldanTomas/paginaBuscar.php">
+            <button class="btn-enviar" style="font-size:2vw">Buscar Usuario</button>
+          </a>
+          <!--<p class="exp">Apagar Puerto 1</p>-->
+          <a href="http://localhost/RoldanTomas/paginaSignup.php" target="_blank"> <!--10.0.250.250-->
+            <button class="btn-enviar" style="font-size:2vw">Crear Nuevo Usuario</button>
+          </a>
+          <!--<p class="exp">Encender Puerto 4 por 5 seg</p>-->
 
-      </div>
+        </div>
       </center>
       
       <div class="right">

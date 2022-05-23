@@ -1,103 +1,152 @@
 <?php 
     session_start();
-    if ($_SESSION['correo'] == "" || $_SESSION['Pass'] == ""){
+    if ($_SESSION['correo'] == "" || $_SESSION['Pass'] == "" || $_SESSION['administrador'] == 0){
         session_destroy();
-        header("Location: http://localhost/RoldanTomas/index.html");
+        echo "Usuario no autorizado";
+        die();
     }
 
     $nombre = $_POST['SNombre'];
     $apellido = $_POST['SApellido'];
     $correo = $_POST['SCorreo'];
     $administrador = $_POST['SAdmin'];
+    $tabla = $_POST['STabla'];
 
-
- $servername = "localhost";
- $username = "root"; //"tester1"
- $password = ""; //"tester1"
- $dbname = "usuarios_registrados";
+    $servername = "localhost";
+    $username = "root"; //"tester1"
+    $password = ""; //"tester1"
+    $dbname = "usuarios_registrados";
 
 // 1) Conexión
-if ($conexión = mysqli_connect($servername, $username, $password, $dbname)){
-echo "<p>MySQL le ha dado permiso a PHP para ejecutar consultas con ese usuario</p>";
-}
+    if ($conn = mysqli_connect($servername, $username, $password, $dbname)){
+    echo "<p>MySQL le ha dado permiso a PHP para ejecutar consultas con ese usuario</p>";
+    }
 // 2) Preparar la orden SQL
-$consulta= "SELECT*FROM registros WHERE (";
-if(!empty($nombre)){
-    $consulta= $consulta + "Nombre LIKE $nombre " ;
-}
+    // works only when all inputs are filled: $consulta = "SELECT * FROM registros WHERE (Nombre LIKE '$nombre' AND  Apellido LIKE '$apellido' AND  Correo LIKE '$correo' AND  administrador LIKE $administrador)";
 
-if(!empty($nombre) && !empty($apellido)){
-    $consulta= $consulta + "AND  ";
-}
+    if($administrador == 0){
 
-if(!empty($apellido)){
-    $consulta= $consulta + "Apellido LIKE $apellido ";
-}
+        
+        if (!empty($nombre) && empty($apellido) && empty($correo)){
+            
+            $consulta = "SELECT * FROM $tabla WHERE (Nombre LIKE '$nombre' and administrador = 0)";
+            
+        }
+        if(empty($nombre) && !empty($apellido) && empty($correo)){
+            
+            $consulta = "SELECT * FROM $tabla WHERE (Apellido LIKE '$apellido' and administrador = 0)";
+            
+        }    
+        if(empty($nombre) && empty($apellido) && !empty($correo)){
+            
+            $consulta = "SELECT * FROM $tabla WHERE (Correo LIKE '$correo' and administrador = 0)";
+            
+        }
+        if (!empty($nombre) && !empty($apellido) && empty($correo)){
+            
+            $consulta = "SELECT * FROM $tabla WHERE (Nombre LIKE '$nombre'and Apellido like '$apellido' and administrador = 0)";
+            
+        }
+        if (!empty($nombre) && empty($apellido) && !empty($correo)){
+            
+            $consulta = "SELECT * FROM $tabla WHERE (Nombre LIKE '$nombre' and Correo LIKE '$correo' and administrador = 0)";
+            
+        }
+        if (empty($nombre) && !empty($apellido) && !empty($correo)){
+            
+            $consulta = "SELECT * FROM $tabla WHERE (Apellido like '$apellido' and Correo LIKE '$correo' and administrador = 0)";
+            
+        }
+        if (!empty($nombre) && !empty($apellido) && !empty($correo)){
+            
+            $consulta = "SELECT * FROM $tabla WHERE (Nombre LIKE '$nombre' and Apellido like '$apellido' and Correo LIKE '$correo' and administrador = 0)";
+            
+        }
+    
+    }
+    else{
 
-if((!empty($apellido) && !empty($correo)) || (!empty($correo) && !empty($nombre))){
-    $consulta= $consulta + "AND  ";
-}
+        if (!empty($nombre) && empty($apellido) && empty($correo)){
+            
+            $consulta = "SELECT * FROM $tabla WHERE (Nombre LIKE '$nombre' and administrador = 1)";
+            
+        }
+        if(empty($nombre) && !empty($apellido) && empty($correo)){
+            
+            $consulta = "SELECT * FROM $tabla WHERE (Apellido LIKE '$apellido' and administrador = 1)";
+            
+        }    
+        if(empty($nombre) && empty($apellido) && !empty($correo)){
+            
+            $consulta = "SELECT * FROM $tabla WHERE (Correo LIKE '$correo' and administrador = 1)";
+            
+        }
+        if (!empty($nombre) && !empty($apellido) && empty($correo)){
+            
+            $consulta = "SELECT * FROM $tabla WHERE (Nombre LIKE '$nombre'and Apellido like '$apellido' and administrador = 1)";
+            
+        }
+        if (!empty($nombre) && empty($apellido) && !empty($correo)){
+            
+            $consulta = "SELECT * FROM $tabla WHERE (Nombre LIKE '$nombre' and Correo LIKE '$correo' and administrador = 1)";
+            
+        }
+        if (empty($nombre) && !empty($apellido) && !empty($correo)){
+            
+            $consulta = "SELECT * FROM $tabla WHERE (Apellido like '$apellido' and Correo LIKE '$correo' and administrador = 1)";
+            
+        }
+        if (!empty($nombre) && !empty($apellido) && !empty($correo)){
+            
+            $consulta = "SELECT * FROM $tabla WHERE (Nombre LIKE '$nombre' and Apellido like '$apellido' and Correo LIKE '$correo' and administrador = 1)";
+            
+        }
 
-//si buscan según un correo, se agrega la línea
-if(!empty($correo)){
-    $consulta= $consulta + "Correo LIKE $correo ";
-}
-
-//si es administrador además de alguna de las anteriores, se agrega la línea
-if((!empty($apellido) && !empty($administrador)) || (!empty($administrador) && !empty($nombre)) && (!empty($administrador) && !empty($correo))){
-    $consulta= $consulta + "AND  ";
-}
-
-if(!empty($administrador)){
-    $consulta= $consulta + "administrador LIKE $administrador";
-}
-
-$consulta= $consulta + ")";
-
+    }
+    
 // 3) Ejecutar la orden y obtener datos
-mysqli_select_db($conexión,$dbname);
-$datos= mysqli_query ($conexión,$consulta);
+    mysqli_select_db($conn,$dbname);
+    $datos= mysqli_query ($conn,$consulta);
 
 // 4) Ir Imprimiendo las filas resultantes
-while ($fila = mysqli_fetch_array($datos)){
+    while ($fila = mysqli_fetch_array($datos)){
 
-echo "<header> Registros de ingresos y egresos de cuentas </header>";
+   // echo "<header> Registros de ingresos y egresos de cuentas </header>";
 
-echo "<p> ";
+    echo "<p> ";
 
-echo $fila ["Fecha"];
+    if($tabla == "registros"){
 
-echo " - "; // un separador
+        echo $fila ["Fecha"];
+        echo " - "; // un separador
 
-echo $fila["Nombre"];
+        echo $fila ["Operacion"];
+        echo " - "; // un separador
+        
+    }
+        
+    echo $fila["Nombre"];
+    echo " - "; // un separador
 
-echo " - "; // un separador
+    echo $fila ["Apellido"];
+    echo " - "; // un separador
 
-echo $fila ["Apellido"];
+    echo $fila["Correo"];
+    echo " - "; // un separador
 
-echo " - "; // un separador
+    if($fila["administrador"]== 1){//revisa si es un administrador y responde en palabras
+        echo "Administrador";
+    }
+    else{
+        echo "Usuario";
+    }
 
-echo $fila["Correo"];
+    echo " </p>";
 
-echo " - "; // un separador
+    echo "</br>";
+    }
 
-if($fila["administrador"]== 1){//revisa si es un administrador y responde según lo encontrado
-    echo "Administrador";
-}
-else{
-    echo "Usuario";
-}
-
-echo " - "; // un separador
-
-echo $fila ["Operacion"];
-
-echo " </p>";
-
-echo "</br>";
-}
-
-if(!$fila || empty($fila)) {
-echo "<p> MySQL no conoce ese usuario y contraseña</p>";
-}
+    if(empty($fila)) {
+    echo "<p> MySQL no conoce ese usuario y contraseña</p>";
+    }
 ?>

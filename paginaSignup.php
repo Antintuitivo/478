@@ -1,9 +1,11 @@
 <?php 
     session_start();
-    if ($_SESSION['correo'] == "" || $_SESSION['Pass'] == ""){
+    if ($_SESSION['correo'] == "" || $_SESSION['Pass'] == "" || $_SESSION['administrador'] == 0){
         session_destroy();
-        header("Location: http://localhost/RoldanTomas/index.html");
+        echo "Usuario no autorizado";
+        die();
     }
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -14,7 +16,7 @@
     </head>
     <body>
         <h1 class="from-titulo">Formulario de registro</h1>
-        <form action="signin.php" method="post" class="form-register">
+        <form action="signupconnect.php" method="post" class="form-register">
             <h2 class="form-titulo">CREA UNA CUENTA</h2>   
             <div class="contenedor-inputs">
                 <input type="text" name="nombre" placeholder="Nombre" class="input-48" required>

@@ -2,11 +2,12 @@
 session_start();
 
  // Guardar datos de sesión
-$_SESSION["correo"] = $_POST['correo'];
-$_SESSION["Pas"] = $_POST['Pass'];
 
  $correo = $_POST['Correo'];
  $Contr = $_POST['Pass'];
+
+ $_SESSION['Pass'] = $correo;
+ $_SESSION['correo'] = $Contr;
 
  $servername = "localhost";
  $username = "root"; //"tester1"
@@ -45,9 +46,15 @@ if ($conn = mysqli_connect($servername, $username, $PasServer, $dbname)){
         }
         //echo $userType;
 
+        $_SESSION['administrador'] = $userType;
+
         $apellido= $fila['Apellido'];
+        
         $nombre = $fila['Nombre'];
     }
+
+    $_SESSION['Apellido'] = $apellido;
+    $_SESSION['Nombre'] = $nombre;
 
     $registro= "INSERT INTO `registros` (`Nombre`, `Apellido`, `Correo`, `Operación`, `administrador`) 
     VALUES ('$nombre', '$apellido', '$correo', 'Ingreso', '$userType')";
@@ -62,9 +69,9 @@ if(($correo == $corrTabla) && ($Contr == $passTabla) && ($userType == "1")){
     $conn->query($registro);
     
 } else{//expulsa al usuario si no coinciden los datos
-    session_destroy();
+    
     header("Location: http://localhost/RoldanTomas/ErrorDeLogin.html", true, 301);
-
+    session_destroy();
+    
 }
-
 ?>
