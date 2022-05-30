@@ -7,6 +7,11 @@
         die();
     }
 
+    $servername = "localhost";
+    $username = "root"; //"tester1"
+    $PasServer = ""; //"tester1"
+    $dbname = "usuarios_registrados";
+
     $apellido = $_SESSION['Apellido'];
     $nombre = $_SESSION['Nombre'];
     $correo = $_SESSION['correo'];
@@ -16,6 +21,7 @@
     $registro= "INSERT INTO `registros` (`Nombre`, `Apellido`, `Correo`, `Operacion`, `administrador`) 
     VALUES ('$nombre', '$apellido', '$correo', 'Egreso', '$user')";
     
+    $conn = mysqli_connect($servername, $username, $PasServer, $dbname);
 
     if ($conn->query($registro)) {
         echo "Salida registrada";

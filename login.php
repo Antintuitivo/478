@@ -61,10 +61,12 @@ if ($conn = mysqli_connect($servername, $username, $PasServer, $dbname)){
 
 } //Compara el usuario ingresado con el de la tabla y redirecciona según si es usuario o Administrador
 if(($correo == $corrTabla) && ($Contr == $passTabla) && ($userType == "1")){
+   
     header("Location: http://localhost/RoldanTomas/paginaAdmin.php", true, 301);
     $conn->query($registro);
 
 } elseif(($correo == $corrTabla) && ($Contr == $passTabla) && ($userType == "0")){
+   
     header("Location: http://localhost/RoldanTomas/paginaUsuario.php", true, 301);
     $conn->query($registro);
     

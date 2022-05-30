@@ -40,7 +40,7 @@
             <button class="btn-enviar" style="font-size:2vw">Crear Nuevo Usuario</button>
           </a>
           <!--<p class="exp">Encender Puerto 4 por 5 seg</p>-->
-          <a href="http://localhost/RoldanTomas/logout.php" target="_blank"> <!--10.0.250.250-->
+          <a href="http://localhost/RoldanTomas/logout.php"> <!--10.0.250.250-->
             <button class="btn-enviar" style="font-size:2vw">Salir</button>
           </a>
 
