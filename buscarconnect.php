@@ -23,6 +23,7 @@
     }
 // 2) Preparar la orden SQL
     // works only when all inputs are filled: $consulta = "SELECT * FROM registros WHERE (Nombre LIKE '$nombre' AND  Apellido LIKE '$apellido' AND  Correo LIKE '$correo' AND  administrador LIKE $administrador)";
+/* olvidate de js, usa el operador de concatenación ("ad" .= "bc" = "adbc" )
 ?>
 <script>
 
@@ -50,7 +51,7 @@
 
 </script>
 
-<?php
+<?php */
     if($administrador == 0){
 
         
