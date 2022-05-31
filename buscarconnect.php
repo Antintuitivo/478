@@ -23,7 +23,34 @@
     }
 // 2) Preparar la orden SQL
     // works only when all inputs are filled: $consulta = "SELECT * FROM registros WHERE (Nombre LIKE '$nombre' AND  Apellido LIKE '$apellido' AND  Correo LIKE '$correo' AND  administrador LIKE $administrador)";
+?>
+<script>
 
+    let administrador = <?php $administrador ?>;
+    let nombre = <?php $nombre ?>
+    
+    let consulta = "SELECT * FROM " + <?php $tabla ?>;
+
+    if ( administrador == 0){
+        consulta += " WHERE (administrador = 0 ";
+    }
+    else if(administrador == 1){
+        consulta += " WHERE (administrador = 1 ";
+    }
+    else{
+        consulta += " WHERE ("
+    }
+    if (administrador == ""){
+
+    }
+
+
+
+
+
+</script>
+
+<?php
     if($administrador == 0){
 
         
@@ -32,38 +59,35 @@
             $consulta = "SELECT * FROM $tabla WHERE (Nombre LIKE '$nombre' and administrador = 0)";
             
         }
-        elseif(empty($nombre) && !empty($apellido) && empty($correo)){
+        if(empty($nombre) && !empty($apellido) && empty($correo)){
             
             $consulta = "SELECT * FROM $tabla WHERE (Apellido LIKE '$apellido' and administrador = 0)";
             
         }    
-        elseif(empty($nombre) && empty($apellido) && !empty($correo)){
+        if(empty($nombre) && empty($apellido) && !empty($correo)){
             
             $consulta = "SELECT * FROM $tabla WHERE (Correo LIKE '$correo' and administrador = 0)";
             
         }
-        elseif (!empty($nombre) && !empty($apellido) && empty($correo)){
+        if (!empty($nombre) && !empty($apellido) && empty($correo)){
             
             $consulta = "SELECT * FROM $tabla WHERE (Nombre LIKE '$nombre'and Apellido like '$apellido' and administrador = 0)";
             
         }
-        elseif (!empty($nombre) && empty($apellido) && !empty($correo)){
+        if (!empty($nombre) && empty($apellido) && !empty($correo)){
             
             $consulta = "SELECT * FROM $tabla WHERE (Nombre LIKE '$nombre' and Correo LIKE '$correo' and administrador = 0)";
             
         }
-        elseif (empty($nombre) && !empty($apellido) && !empty($correo)){
+        if (empty($nombre) && !empty($apellido) && !empty($correo)){
             
             $consulta = "SELECT * FROM $tabla WHERE (Apellido like '$apellido' and Correo LIKE '$correo' and administrador = 0)";
             
         }
-        elseif (!empty($nombre) && !empty($apellido) && !empty($correo)){
+        if (!empty($nombre) && !empty($apellido) && !empty($correo)){
             
             $consulta = "SELECT * FROM $tabla WHERE (Nombre LIKE '$nombre' and Apellido like '$apellido' and Correo LIKE '$correo' and administrador = 0)";
             
-        }
-        elseif (empty($nombre) && empty($apellido) && empty($correo)){
-            $consulta = "SELECT * FROM $tabla WHERE (administrador = 0)";
         }
     
     }
@@ -74,38 +98,35 @@
             $consulta = "SELECT * FROM $tabla WHERE (Nombre LIKE '$nombre' and administrador = 1)";
             
         }
-        elseif(empty($nombre) && !empty($apellido) && empty($correo)){
+        if(empty($nombre) && !empty($apellido) && empty($correo)){
             
             $consulta = "SELECT * FROM $tabla WHERE (Apellido LIKE '$apellido' and administrador = 1)";
             
         }    
-        elseif(empty($nombre) && empty($apellido) && !empty($correo)){
+        if(empty($nombre) && empty($apellido) && !empty($correo)){
             
             $consulta = "SELECT * FROM $tabla WHERE (Correo LIKE '$correo' and administrador = 1)";
             
         }
-        elseif (!empty($nombre) && !empty($apellido) && empty($correo)){
+        if (!empty($nombre) && !empty($apellido) && empty($correo)){
             
             $consulta = "SELECT * FROM $tabla WHERE (Nombre LIKE '$nombre'and Apellido like '$apellido' and administrador = 1)";
             
         }
-        elseif (!empty($nombre) && empty($apellido) && !empty($correo)){
+        if (!empty($nombre) && empty($apellido) && !empty($correo)){
             
             $consulta = "SELECT * FROM $tabla WHERE (Nombre LIKE '$nombre' and Correo LIKE '$correo' and administrador = 1)";
             
         }
-        elseif (empty($nombre) && !empty($apellido) && !empty($correo)){
+        if (empty($nombre) && !empty($apellido) && !empty($correo)){
             
             $consulta = "SELECT * FROM $tabla WHERE (Apellido like '$apellido' and Correo LIKE '$correo' and administrador = 1)";
             
         }
-        elseif (!empty($nombre) && !empty($apellido) && !empty($correo)){
+        if (!empty($nombre) && !empty($apellido) && !empty($correo)){
             
             $consulta = "SELECT * FROM $tabla WHERE (Nombre LIKE '$nombre' and Apellido like '$apellido' and Correo LIKE '$correo' and administrador = 1)";
             
-        }
-        elseif (empty($nombre) && empty($apellido) && empty($correo)){
-            $consulta = "SELECT * FROM $tabla WHERE (administrador = 1)";
         }
 
     }

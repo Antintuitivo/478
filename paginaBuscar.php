@@ -35,11 +35,15 @@
 
                 <select name="SAdmin" class="input-100">
 
+                    <option class="input-100" value=""></option>
+
                     <option class="input-100" value="0">Usuario</option>
 
                     <option class="input-100" value="1">Administrador</option>
 
                 </select>
+
+                <input type="date" name="SFecha" class="input-100">
 
                 <input type="submit" value="Buscar" class="btn-enviar">
 

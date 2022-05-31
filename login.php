@@ -6,8 +6,8 @@ session_start();
  $correo = $_POST['Correo'];
  $Contr = $_POST['Pass'];
 
- $_SESSION['Pass'] = $correo;
- $_SESSION['correo'] = $Contr;
+ $_SESSION['Pass'] = $Contr;
+ $_SESSION['correo'] = $correo;
 
  $servername = "localhost";
  $username = "root"; //"tester1"
