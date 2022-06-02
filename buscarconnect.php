@@ -23,36 +23,28 @@
     }
 // 2) Preparar la orden SQL
     // works only when all inputs are filled: $consulta = "SELECT * FROM registros WHERE (Nombre LIKE '$nombre' AND  Apellido LIKE '$apellido' AND  Correo LIKE '$correo' AND  administrador LIKE $administrador)";
-/* olvidate de js, usa el operador de concatenación ("ad" .= "bc" = "adbc" )
-?>
-<script>
-
-    let administrador = <?php $administrador ?>;
-    let nombre = <?php $nombre ?>
-    
-    let consulta = "SELECT * FROM " + <?php $tabla ?>;
-
-    if ( administrador == 0){
-        consulta += " WHERE (administrador = 0 ";
+    $consulta = "SELECT * FROM $tabla WHERE (";
+    if(!empty($administrador)){
+        $consulta .= "administrador == $administrador";
     }
-    else if(administrador == 1){
-        consulta += " WHERE (administrador = 1 ";
+    if(!empty($administrador) && !empty($nombre)){
+        $consulta .= " and ";
     }
-    else{
-        consulta += " WHERE ("
+    if(!empty($nombre)){
+        $consulta .= "Nombre == $nombre";
     }
-    if (administrador == ""){
-
+    if((!empty($nombre)||!empty($administrador))&&!empty($apellido)){
+        $consulta .= " and ";
+    }
+    if(!empty($apellido)){
+        $consulta .= "Apellido == $apellido";
+    }
+    if((!empty($nombre)||!empty($administrador)||!empty($apellido))&&!empty($correo)){
+        $consulta .= " and ";
     }
 
 
-
-
-
-</script>
-
-<?php */
-    if($administrador == 0){
+    /*if($administrador == 0){
 
         
         if (!empty($nombre) && empty($apellido) && empty($correo)){
@@ -130,7 +122,7 @@
             
         }
 
-    }
+    }*/
     
 // 3) Ejecutar la orden y obtener datos
     mysqli_select_db($conn,$dbname);
