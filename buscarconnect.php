@@ -6,6 +6,7 @@
         die();
     }
 
+    $fecha = $_POST['SFecha'];
     $nombre = $_POST['SNombre'];
     $apellido = $_POST['SApellido'];
     $correo = $_POST['SCorreo'];
@@ -23,107 +24,40 @@
     }
 // 2) Preparar la orden SQL
     // works only when all inputs are filled: $consulta = "SELECT * FROM registros WHERE (Nombre LIKE '$nombre' AND  Apellido LIKE '$apellido' AND  Correo LIKE '$correo' AND  administrador LIKE $administrador)";
+    
     $consulta = "SELECT * FROM $tabla WHERE (";
+    
     if(!empty($administrador)){
-        $consulta .= "administrador == $administrador";
+        $consulta .= "administrador = '$administrador'";
     }
     if(!empty($administrador) && !empty($nombre)){
         $consulta .= " and ";
     }
     if(!empty($nombre)){
-        $consulta .= "Nombre == $nombre";
+        $consulta .= "Nombre = '$nombre'";
     }
     if((!empty($nombre)||!empty($administrador))&&!empty($apellido)){
         $consulta .= " and ";
     }
     if(!empty($apellido)){
-        $consulta .= "Apellido == $apellido";
+        $consulta .= "Apellido = '$apellido'";
     }
     if((!empty($nombre)||!empty($administrador)||!empty($apellido))&&!empty($correo)){
         $consulta .= " and ";
     }
-
-
-    /*if($administrador == 0){
-
-        
-        if (!empty($nombre) && empty($apellido) && empty($correo)){
-            
-            $consulta = "SELECT * FROM $tabla WHERE (Nombre LIKE '$nombre' and administrador = 0)";
-            
-        }
-        if(empty($nombre) && !empty($apellido) && empty($correo)){
-            
-            $consulta = "SELECT * FROM $tabla WHERE (Apellido LIKE '$apellido' and administrador = 0)";
-            
-        }    
-        if(empty($nombre) && empty($apellido) && !empty($correo)){
-            
-            $consulta = "SELECT * FROM $tabla WHERE (Correo LIKE '$correo' and administrador = 0)";
-            
-        }
-        if (!empty($nombre) && !empty($apellido) && empty($correo)){
-            
-            $consulta = "SELECT * FROM $tabla WHERE (Nombre LIKE '$nombre'and Apellido like '$apellido' and administrador = 0)";
-            
-        }
-        if (!empty($nombre) && empty($apellido) && !empty($correo)){
-            
-            $consulta = "SELECT * FROM $tabla WHERE (Nombre LIKE '$nombre' and Correo LIKE '$correo' and administrador = 0)";
-            
-        }
-        if (empty($nombre) && !empty($apellido) && !empty($correo)){
-            
-            $consulta = "SELECT * FROM $tabla WHERE (Apellido like '$apellido' and Correo LIKE '$correo' and administrador = 0)";
-            
-        }
-        if (!empty($nombre) && !empty($apellido) && !empty($correo)){
-            
-            $consulta = "SELECT * FROM $tabla WHERE (Nombre LIKE '$nombre' and Apellido like '$apellido' and Correo LIKE '$correo' and administrador = 0)";
-            
-        }
-    
+    if(!empty($correo)){
+        $consulta .= "Correo = '$correo'";
     }
-    else{
+    if((!empty($nombre)||!empty($administrador)||!empty($apellido)||!empty($correo)) && !empty($fecha)){
+        $consulta .= " and ";
+    }
+    if(!empty($fecha)){
+        $consulta .= "Fecha = '$fecha'";
+    }
+    $consulta .= ")";
 
-        if (!empty($nombre) && empty($apellido) && empty($correo)){
-            
-            $consulta = "SELECT * FROM $tabla WHERE (Nombre LIKE '$nombre' and administrador = 1)";
-            
-        }
-        if(empty($nombre) && !empty($apellido) && empty($correo)){
-            
-            $consulta = "SELECT * FROM $tabla WHERE (Apellido LIKE '$apellido' and administrador = 1)";
-            
-        }    
-        if(empty($nombre) && empty($apellido) && !empty($correo)){
-            
-            $consulta = "SELECT * FROM $tabla WHERE (Correo LIKE '$correo' and administrador = 1)";
-            
-        }
-        if (!empty($nombre) && !empty($apellido) && empty($correo)){
-            
-            $consulta = "SELECT * FROM $tabla WHERE (Nombre LIKE '$nombre'and Apellido like '$apellido' and administrador = 1)";
-            
-        }
-        if (!empty($nombre) && empty($apellido) && !empty($correo)){
-            
-            $consulta = "SELECT * FROM $tabla WHERE (Nombre LIKE '$nombre' and Correo LIKE '$correo' and administrador = 1)";
-            
-        }
-        if (empty($nombre) && !empty($apellido) && !empty($correo)){
-            
-            $consulta = "SELECT * FROM $tabla WHERE (Apellido like '$apellido' and Correo LIKE '$correo' and administrador = 1)";
-            
-        }
-        if (!empty($nombre) && !empty($apellido) && !empty($correo)){
-            
-            $consulta = "SELECT * FROM $tabla WHERE (Nombre LIKE '$nombre' and Apellido like '$apellido' and Correo LIKE '$correo' and administrador = 1)";
-            
-        }
+    $counter = 0;
 
-    }*/
-    
 // 3) Ejecutar la orden y obtener datos
     mysqli_select_db($conn,$dbname);
     $datos= mysqli_query ($conn,$consulta);
@@ -163,10 +97,13 @@
 
     echo " </p>";
 
+    $counter++;
+
     echo "</br>";
     }
+    if ($counter == 0){
 
-    if(empty($fila)) {
-    echo "<p> MySQL no conoce ese usuario y contraseña</p>";
+        echo "No existe tal usuario en la base de datos";
+
     }
 ?>
